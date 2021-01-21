@@ -17,4 +17,6 @@ public interface OrderDAO {
 
     public void updateOrderAfter(long userId, long cartId);
 
+    public void changeOrderAddress(long userId, long cartId, String address);
+
 }

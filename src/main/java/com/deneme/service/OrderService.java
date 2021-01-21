@@ -20,6 +20,8 @@ public interface OrderService {
 
     void updateOrderAfter(long userId,long cartId);
 
+    void changeOrderAddress(long userId,long cartId,String address);
+
 
 
 

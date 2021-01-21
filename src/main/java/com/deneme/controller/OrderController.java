@@ -26,7 +26,7 @@ public class OrderController {
 
     @RequestMapping(value = "/getOrder", method = RequestMethod.POST, consumes = "application/json")
     public @ResponseBody
-    void newCategory(@CookieValue(value = "token") Long token, @RequestBody Order order) {
+    void newOrder(@CookieValue(value = "token") Long token, @RequestBody Order order) {
 
         long userId = (long) tokens.getTokensMap().get(token);
 
@@ -38,6 +38,22 @@ public class OrderController {
         orderService.updateOrderAfter(userId,cartId);
 
         logger.info("Order getting. userId : " + userId);
+    }
+
+    @RequestMapping(value = "/changeOrderAddress/{address}", method = RequestMethod.GET)
+    public @ResponseBody
+    void changeOrderAddress(@CookieValue(value = "token") Long token ,@PathVariable(value = "address") String address) {
+
+        long userId = (long) tokens.getTokensMap().get(token);
+
+        long cartId = shoppingService.getCartByUserId(userId);
+
+
+        orderService.changeOrderAddress(userId,cartId,address);
+
+
+
+        logger.info("Address changing. userId : " + userId +  " address : " + address);
     }
 
 

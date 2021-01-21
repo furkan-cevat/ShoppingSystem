@@ -140,5 +140,25 @@ public class OrderDAOImpl implements OrderDAO {
         }
     }
 
+    @Override
+    public void changeOrderAddress(long userId, long cartId, String address) {
+        Session session = sessionFactory.openSession();
+        try {
+            transaction = session.beginTransaction();
+            String hql = "UPDATE orders SET address =:adr WHERE shoppingCart_cartId = :cId AND user_userId = :uId";
+            Query q = session.createSQLQuery(hql).setParameter("adr",address).setParameter("cId", cartId).setParameter("uId",userId);
+            q.executeUpdate();
+
+            transaction.commit();
+
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+    }
+
 
 }

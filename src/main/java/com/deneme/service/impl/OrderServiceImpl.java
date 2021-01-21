@@ -49,4 +49,9 @@ public class OrderServiceImpl implements OrderService {
     public void updateOrderAfter(long userId, long cartId) {
         orderDAO.updateOrderAfter(userId,cartId);
     }
+
+    @Override
+    public void changeOrderAddress(long userId, long cartId, String address) {
+        orderDAO.changeOrderAddress(userId,cartId,address);
+    }
 }
