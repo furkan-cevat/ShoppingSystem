@@ -58,6 +58,15 @@ public class ProductController {
         return productList;
     }
 
+    @RequestMapping(value =  "getProductById/{productId}", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public Product listAllProduct(@PathVariable(value = "productId") long productId) {
+
+        logger.info("products " + productId);
+        Product product = productService.getProductById(productId);
+        return product;
+    }
+
 
 
 

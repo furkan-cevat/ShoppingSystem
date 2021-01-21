@@ -50,4 +50,9 @@ public class ProductServiceImpl implements ProductService {
     public void updateProductCartId(long cartId) {
         productDAO.updateProductCartId(cartId);
     }
+
+    @Override
+    public Product getProductById(long productId) {
+        return productDAO.getProductById(productId);
+    }
 }

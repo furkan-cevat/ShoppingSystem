@@ -21,6 +21,8 @@ public interface ProductService {
 
     void updateProductCartId(long cartId);
 
+     Product getProductById(long productId);
+
 
 
 

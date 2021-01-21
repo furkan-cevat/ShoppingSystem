@@ -15,5 +15,7 @@ public interface ProductDAO {
 
     void updateProductCartId(long cartId);
 
+    Product getProductById(long productId);
+
 
 }

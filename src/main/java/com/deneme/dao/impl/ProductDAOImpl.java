@@ -105,5 +105,14 @@ public class ProductDAOImpl implements ProductDAO {
         }
     }
 
+    @Override
+    public Product getProductById(long productId) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Product p = session.get(Product.class, productId);
+        session.getTransaction().commit();
+        return p;
+    }
+
 
 }
