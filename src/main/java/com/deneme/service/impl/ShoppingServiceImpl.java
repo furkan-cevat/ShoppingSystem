@@ -2,6 +2,7 @@ package com.deneme.service.impl;
 
 import com.deneme.dao.ShoppingDAO;
 import com.deneme.dao.UserDAO;
+import com.deneme.model.Product;
 import com.deneme.model.ShoppingCart;
 import com.deneme.model.User;
 import com.deneme.service.ShoppingService;
@@ -23,5 +24,15 @@ public class ShoppingServiceImpl implements ShoppingService {
     @Override
     public long newChart(ShoppingCart cart) {
         return shoppingDAO.newChart(cart);
+    }
+
+    @Override
+    public void addShoppingChart(long cartId,long productId) {
+        shoppingDAO.addShoppingChart(cartId,productId);
+    }
+
+    @Override
+    public long getCartByUserId(long userId) {
+        return shoppingDAO.getCartByUserId(userId);
     }
 }

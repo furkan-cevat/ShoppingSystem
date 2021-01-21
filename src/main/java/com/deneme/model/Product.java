@@ -20,6 +20,7 @@ public class Product {
     @JsonIgnore
     private Category category;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private ShoppingCart shoppingCart;
@@ -59,5 +60,13 @@ public class Product {
 
     public Long getProductId() {
         return productId;
+    }
+
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
     }
 }

@@ -10,11 +10,10 @@ import java.util.Set;
 public class ShoppingCart {
 
     @Id
-    @SequenceGenerator(name = "native", sequenceName = "hibernate_sequence",allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "native")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long cartId;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.REMOVE)
+    @OneToOne
     @JsonIgnore
     private User user;
 
@@ -24,10 +23,9 @@ public class ShoppingCart {
             mappedBy = "shoppingCart")
     private Set<Product> products = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            mappedBy = "shoppingCart")
-    private Set<Order> orders = new HashSet<>();
+    @OneToOne
+    @JsonIgnore
+    private Order order;
 
 
 
@@ -58,5 +56,13 @@ public class ShoppingCart {
 
     public void setProducts(Set<Product> products) {
         this.products = products;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

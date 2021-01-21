@@ -1,21 +1,25 @@
 package com.deneme.controller;
 
+import com.deneme.config.Tokens;
 import com.deneme.dao.UserDAO;
 import com.deneme.model.ShoppingCart;
-import com.deneme.model.User;
 import com.deneme.service.ShoppingService;
-import com.deneme.service.UserService;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.WebUtils;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@CrossOrigin
 @RequestMapping("/shoppingApi")
 @Controller
 public class ShoppingCartController {
+    @Autowired
+    private Tokens tokens;
 
     @Autowired
     private ShoppingService shoppingService;
@@ -26,14 +30,37 @@ public class ShoppingCartController {
     private static final Logger logger = Logger.getLogger(ShoppingCartController.class);
 
     @RequestMapping(value = "/newChart", method = RequestMethod.GET)
-    public @ResponseBody
-    long newUser() {
-
+    public @ResponseBody long newCart(@CookieValue(value = "token") Long token) {
         ShoppingCart sc = new ShoppingCart();
-        sc.setUser(userDAO.getUserById((Long) SecurityController.loginKullaniciID));
+
+        long userId = (long) tokens.getTokensMap().get(token);
+        sc.setUser(userDAO.getUserById(userId));
         long id = shoppingService.newChart(sc);
         logger.info("Shopping Cart adding. id : " + id);
         return id;
     }
+
+    @RequestMapping(value = "/addShoppingCart/{productId}", method = RequestMethod.GET)
+    public @ResponseBody long addShoppingCart(@CookieValue(value = "token") Long token,@PathVariable(value = "productId") long productId) {
+        ShoppingCart sc = new ShoppingCart();
+
+        long userId = (long) tokens.getTokensMap().get(token);
+
+        long cartId = shoppingService.getCartByUserId(userId);
+
+        System.out.println(cartId);
+
+        shoppingService.addShoppingChart(cartId,productId);
+
+        logger.info("Shopping Cart adding productId: " + productId);
+        return productId;
+    }
+
+
+
+
+
+
+
 
 }

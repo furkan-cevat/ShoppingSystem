@@ -11,13 +11,14 @@ import java.util.Set;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private long orderId;
 
-    @ColumnDefault("0")
     private String paymentMethod;
 
     private String address;
 
+    @JsonIgnore
     private String status;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -25,7 +26,7 @@ public class Order {
     private User user;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private ShoppingCart shoppingCart;
 
@@ -74,4 +75,11 @@ public class Order {
     }
 
 
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
+    }
 }

@@ -16,13 +16,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userId;
 
+   ;
+
+
     private String username;
 
     private String password;
 
-    private String role;
 
-    @OneToOne(mappedBy = "user" , fetch = FetchType.LAZY )
+    @OneToOne(mappedBy = "user")
     @JsonIgnore
     private ShoppingCart shoppingCart;
 
@@ -64,14 +66,6 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
 
     public ShoppingCart getShoppingCart() {
         return shoppingCart;
@@ -80,4 +74,8 @@ public class User {
     public void setShoppingCart(ShoppingCart shoppingCart) {
         this.shoppingCart = shoppingCart;
     }
+
+
+
+
 }
