@@ -19,4 +19,6 @@ public interface OrderDAO {
 
     public void changeOrderAddress(long userId, long cartId, String address);
 
+    public void cancelledOrder(long userId);
+
 }

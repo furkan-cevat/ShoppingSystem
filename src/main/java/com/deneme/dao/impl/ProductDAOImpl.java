@@ -85,5 +85,25 @@ public class ProductDAOImpl implements ProductDAO {
 
     }
 
+    @Override
+    public void updateProductCartId(long cartId) {
+        Session session = sessionFactory.openSession();
+        try {
+            transaction = session.beginTransaction();
+            String hql = "UPDATE Product SET shoppingCart_cartId=:id WHERE shoppingCart_cartId = :id2";
+            Query q = session.createQuery(hql).setParameter("id", 0).setParameter("id2",cartId);
+            q.executeUpdate();
+
+            transaction.commit();
+
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+    }
+
 
 }

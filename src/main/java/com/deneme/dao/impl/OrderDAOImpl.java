@@ -160,5 +160,25 @@ public class OrderDAOImpl implements OrderDAO {
         }
     }
 
+    @Override
+    public void cancelledOrder(long userId) {
+        Session session = sessionFactory.openSession();
+        try {
+            transaction = session.beginTransaction();
+            String hql = "DELETE FROM orders WHERE user_userId = :uId";
+            Query q = session.createSQLQuery(hql).setParameter("uId",userId);
+            q.executeUpdate();
+
+            transaction.commit();
+
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+    }
+
 
 }

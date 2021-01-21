@@ -35,7 +35,8 @@ public class ShoppingDAOImpl implements ShoppingDAO {
         Session session = sessionFactory.openSession();
         try {
             transaction = session.beginTransaction();
-            String hql = "UPDATE Product SET shoppingCart_cartId=:id WHERE productId = :id2";
+            String hql = "UPDATE Product SET shoppingCart_cartId=:id WHERE productId = :id2" +
+                         "   ";
             Query q = session.createQuery(hql).setParameter("id", cartId).setParameter("id2",productId);
             q.executeUpdate();
 

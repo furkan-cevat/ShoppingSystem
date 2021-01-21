@@ -9,15 +9,17 @@ import com.deneme.model.User;
 
 public interface ProductService {
 
-    public long createProduct(Product product);
+     long createProduct(Product product);
 
-    public void deleteProduct(long productId);
+     void deleteProduct(long productId);
 
-    public Product updateProduct(Product product);
+     Product updateProduct(Product product);
 
-    public List<Product> listAllProduct();
+     List<Product> listAllProduct();
 
-    public void addShoppingChart(Product product);
+     void addShoppingChart(Product product);
+
+    void updateProductCartId(long cartId);
 
 
 

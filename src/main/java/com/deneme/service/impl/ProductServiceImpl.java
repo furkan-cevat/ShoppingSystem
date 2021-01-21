@@ -45,4 +45,9 @@ public class ProductServiceImpl implements ProductService {
     public void addShoppingChart(Product product) {
         productDAO.updateProduct(product);
     }
+
+    @Override
+    public void updateProductCartId(long cartId) {
+        productDAO.updateProductCartId(cartId);
+    }
 }

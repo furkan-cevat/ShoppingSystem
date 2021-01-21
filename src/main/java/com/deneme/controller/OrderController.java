@@ -3,6 +3,7 @@ package com.deneme.controller;
 import com.deneme.config.Tokens;
 import com.deneme.model.Order;
 import com.deneme.service.OrderService;
+import com.deneme.service.ProductService;
 import com.deneme.service.ShoppingService;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,10 @@ public class OrderController {
 
     @Autowired
     private ShoppingService shoppingService;
+
+    @Autowired
+    private ProductService productService;
+
 
     @RequestMapping(value = "/getOrder", method = RequestMethod.POST, consumes = "application/json")
     public @ResponseBody
@@ -54,6 +59,22 @@ public class OrderController {
 
 
         logger.info("Address changing. userId : " + userId +  " address : " + address);
+    }
+
+    @RequestMapping(value = "/cancelledOrder", method = RequestMethod.GET)
+    public @ResponseBody
+    void cancelledOrder(@CookieValue(value = "token") Long token) {
+
+        long userId = (long) tokens.getTokensMap().get(token);
+
+        long cartId = shoppingService.getCartByUserId(userId);
+
+
+        orderService.cancelledOrder(userId);
+
+        productService.updateProductCartId(cartId);
+
+        logger.info("Order cancelling. userId : " + userId);
     }
 
 

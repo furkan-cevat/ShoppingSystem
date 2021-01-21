@@ -22,6 +22,8 @@ public interface OrderService {
 
     void changeOrderAddress(long userId,long cartId,String address);
 
+    void cancelledOrder(long userId);
+
 
 
 
