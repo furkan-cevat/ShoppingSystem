@@ -89,35 +89,10 @@ public class OrderDAOImpl implements OrderDAO {
         Order orderTemp = new Order();
         orderTemp.setAddress(order.getAddress());
         orderTemp.setPaymentMethod(order.getPaymentMethod());
-        orderTemp.setStatus("1");
+        orderTemp.setStatus(order.getStatus());
 
         session.save(orderTemp);
         session.getTransaction().commit();
-
-
-//        List<Order> list = null;
-//        Session session = sessionFactory.openSession();
-//        try {
-//            transaction = session.beginTransaction();
-//            String sql = "INSERT INTO orders " +
-//                    "(address', " +
-//                    "'paymentMethod' ," +
-//                    "'status', " +
-//                    "'shoppingCart_cartId'," +
-//                    "'user_userId') " +
-//                    "VALUES " +
-//                    "(:param1,:param2,:param3,:param4,:param5);";
-//            session.createSQLQuery(sql).setParameter("param1",order.getAddress()).setParameter("param2",order.getPaymentMethod()).setParameter("param3","0").setParameter("param4",cartId).setParameter("param5",userId).executeUpdate();
-//            transaction.commit();
-//
-//        } catch (Exception e) {
-//            if (transaction != null) {
-//                transaction.rollback();
-//            }
-//        } finally {
-//            session.close();
-//        }
-
     }
 
     @Override
@@ -178,6 +153,25 @@ public class OrderDAOImpl implements OrderDAO {
         } finally {
             session.close();
         }
+    }
+
+    public String orderTracking(long userId){
+        List<Order> orderStatus = null;
+        Session session = sessionFactory.openSession();
+        try {
+            transaction = session.beginTransaction();
+            String hql = "SELECT o.status FROM User u inner join orders o ON u.userId = o.user_userId where o.user_userId = :uId";
+            orderStatus = session.createSQLQuery(hql).setParameter("uId",userId).list();
+            transaction.commit();
+
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return orderStatus.toString();
     }
 
 

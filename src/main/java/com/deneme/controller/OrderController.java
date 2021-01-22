@@ -37,6 +37,7 @@ public class OrderController {
 
         long cartId = shoppingService.getCartByUserId(userId);
 
+        order.setStatus("Sipariş Alındı.");
 
         orderService.getOrder(order);
 
@@ -76,6 +77,28 @@ public class OrderController {
 
         logger.info("Order cancelling. userId : " + userId);
     }
+
+    @RequestMapping(value = "/orderTracking", method = RequestMethod.GET)
+    public @ResponseBody
+    String orderTracking(@CookieValue(value = "token") Long token) {
+
+        long userId = (long) tokens.getTokensMap().get(token);
+
+
+        String x = orderService.orderTracking(userId);
+
+        logger.info("Order tracking. userId : " + userId + " order status : " + x);
+
+        return x;
+
+
+    }
+
+
+
+
+
+
 
 
 

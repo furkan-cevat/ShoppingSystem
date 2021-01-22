@@ -8,13 +8,13 @@ import com.deneme.model.Order;
 
 public interface OrderService {
 
-    public long createOrder(Order order);
+    long createOrder(Order order);
 
-    public void deleteOrder(long orderId);
+    void deleteOrder(long orderId);
 
-    public Order updateOrder(Order order);
+    Order updateOrder(Order order);
 
-    public List<Order> listAllOrder();
+    List<Order> listAllOrder();
 
     void getOrder(Order order);
 
@@ -25,8 +25,5 @@ public interface OrderService {
     void cancelledOrder(long userId);
 
 
-
-
-
-
+    String orderTracking(long userId);
 }

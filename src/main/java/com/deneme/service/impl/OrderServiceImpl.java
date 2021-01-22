@@ -59,4 +59,9 @@ public class OrderServiceImpl implements OrderService {
     public void cancelledOrder(long userId) {
         orderDAO.cancelledOrder(userId);
     }
+
+    @Override
+    public String orderTracking(long userId) {
+        return orderDAO.orderTracking(userId);
+    }
 }
