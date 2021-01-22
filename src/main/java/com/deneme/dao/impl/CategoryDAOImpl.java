@@ -61,6 +61,18 @@ public class CategoryDAOImpl implements CategoryDAO {
         return category;
     }
 
+    public Category findByIdCategory(long categoryId) {
+
+            Session session = sessionFactory.openSession();
+            session.beginTransaction();
+            Category c = session.get(Category.class, categoryId);
+            session.getTransaction().commit();
+            return c;
+
+
+
+    }
+
 
 
 

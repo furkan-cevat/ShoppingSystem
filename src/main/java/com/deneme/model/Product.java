@@ -16,12 +16,12 @@ public class Product {
 
     private int stock;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JsonIgnore
     private Category category;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JsonIgnore
     private ShoppingCart shoppingCart;
 

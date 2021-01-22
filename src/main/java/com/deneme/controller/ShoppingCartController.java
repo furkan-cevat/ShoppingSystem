@@ -48,6 +48,7 @@ public class ShoppingCartController {
 
         long cartId = shoppingService.getCartByUserId(userId);
 
+
         System.out.println(cartId);
 
         shoppingService.addShoppingChart(cartId,productId);

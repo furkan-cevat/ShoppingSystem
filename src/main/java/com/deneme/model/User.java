@@ -24,7 +24,8 @@ public class User {
     private String password;
 
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user",fetch = FetchType.LAZY,
+            cascade =  CascadeType.PERSIST)
     @JsonIgnore
     private ShoppingCart shoppingCart;
 

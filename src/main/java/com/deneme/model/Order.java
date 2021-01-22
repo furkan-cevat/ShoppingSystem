@@ -23,6 +23,7 @@ public class Order {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
+    @JoinColumn(name = "user_userId")
     private User user;
 
 

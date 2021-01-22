@@ -1,6 +1,7 @@
 package com.deneme.dao.impl;
 
 import com.deneme.dao.UserDAO;
+import com.deneme.model.Order;
 import com.deneme.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -135,6 +136,9 @@ public class UserDAOImpl implements UserDAO {
 
         return list;
     }
+
+
+
     @Override
     public User getUserById(long id) {
         List<User> list = null;
@@ -160,6 +164,25 @@ public class UserDAOImpl implements UserDAO {
         return list.get(0);
     }
 
+    @Override
+    public List<Order> getLoginOrders(long userId) {
+        List<Order> orderList = null;
+        Session session = sessionFactory.openSession();
+        try {
+            transaction = session.beginTransaction();
+            String hql = "SELECT o.* FROM User u inner join orders o ON u.userId = o.user_userId where o.user_userId = :uId";
+            orderList = session.createSQLQuery(hql).setParameter("uId",userId).list();
+            transaction.commit();
+
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return orderList;
+    }
 
 
 

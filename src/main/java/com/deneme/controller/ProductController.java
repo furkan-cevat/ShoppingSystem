@@ -19,13 +19,14 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @RequestMapping(value = "/newProduct", method = RequestMethod.POST, consumes = "application/json")
+    @RequestMapping(value = "/newProduct/{categoryId}", method = RequestMethod.POST, consumes = "application/json")
     public @ResponseBody
-    long newProduct(@RequestBody Product product) {
+    Product newProduct(@RequestBody Product product , @PathVariable(value = "categoryId") long categoryId) {
 
-        long id = productService.createProduct(product);
-        logger.info("Product adding. id : " + id);
-        return id;
+
+        Product p = productService.createProduct(product,categoryId);
+        logger.info("Product adding. id : " + p.getProductId());
+        return p;
     }
 
     @RequestMapping(value = "/editProduct/{productId}", method = RequestMethod.PUT, consumes = "application/json")

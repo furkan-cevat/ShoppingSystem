@@ -1,10 +1,8 @@
 package com.deneme.dao.impl;
 
-import com.deneme.dao.CategoryDAO;
 import com.deneme.dao.ProductDAO;
 import com.deneme.model.Category;
 import com.deneme.model.Product;
-import com.deneme.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -23,9 +21,29 @@ public class ProductDAOImpl implements ProductDAO {
     private SessionFactory sessionFactory;
 
     @Override
-    public long createProduct(Product product) {
-        Session session = sessionFactory.getCurrentSession();
-        return (long) session.save(product);
+    public Product createProduct(Product product, Category category) { //Cascade kullanımı
+        Session session = sessionFactory.openSession();
+        try {
+            transaction = session.beginTransaction();
+            Product product1 = new Product();
+            product1.setName(product.getName());
+            product1.setStock(product.getStock());
+            product1.setCategory(category);
+            session.save(product1);
+            transaction.commit();
+            return product1;
+
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+
+    return null;
+
+
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.deneme.controller;
 
+import com.deneme.config.Tokens;
+import com.deneme.model.Order;
 import com.deneme.model.User;
 import com.deneme.service.UserService;
 import org.jboss.logging.Logger;
@@ -15,6 +17,9 @@ import java.util.List;
 public class UserController {
 
     private static final Logger logger = Logger.getLogger(UserController.class);
+
+    @Autowired
+    private Tokens tokens;
 
     @Autowired
     private UserService userService;
@@ -57,6 +62,14 @@ public class UserController {
         return userList;
     }
 
+
+    @RequestMapping(value = "/getLoginUserOrders", method = RequestMethod.GET,produces = "application/json")
+    @ResponseBody
+    public List<Order> getLoginOrders(@CookieValue(value = "token") Long token) {
+
+        long userId = (long) tokens.getTokensMap().get(token);
+        return userService.getLoginOrders(userId);
+    }
 
 
 

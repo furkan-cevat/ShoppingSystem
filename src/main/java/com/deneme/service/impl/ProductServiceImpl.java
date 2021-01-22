@@ -20,10 +20,17 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductDAO productDAO;
 
+    @Autowired
+    private CategoryDAO categoryDAO;
+
 
     @Override
-    public long createProduct(Product product) {
-        return productDAO.createProduct(product);
+    public Product createProduct(Product product,long categoryId) {
+        Category category = categoryDAO.findByIdCategory(categoryId);
+
+
+
+        return productDAO.createProduct(product,category);
     }
 
     @Override

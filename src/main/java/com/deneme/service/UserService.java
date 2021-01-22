@@ -2,6 +2,7 @@ package com.deneme.service;
 
 ;
 
+import com.deneme.model.Order;
 import com.deneme.model.User;
 
 import java.util.List;
@@ -19,9 +20,5 @@ public interface UserService {
 
     public List<User> listAllUser();
 
-
-
-
-
-
+    List<Order> getLoginOrders(long userId);
 }

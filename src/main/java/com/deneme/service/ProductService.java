@@ -9,7 +9,7 @@ import com.deneme.model.User;
 
 public interface ProductService {
 
-     long createProduct(Product product);
+     Product createProduct(Product product,long categoryId);
 
      void deleteProduct(long productId);
 

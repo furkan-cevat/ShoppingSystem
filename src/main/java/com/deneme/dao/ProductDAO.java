@@ -1,11 +1,12 @@
 package com.deneme.dao;
 
+import com.deneme.model.Category;
 import com.deneme.model.Product;
 
 import java.util.List;
 
 public interface ProductDAO {
-     long createProduct(Product product);
+     Product createProduct(Product product, Category category);
 
      void deleteProduct(long productId);
 
