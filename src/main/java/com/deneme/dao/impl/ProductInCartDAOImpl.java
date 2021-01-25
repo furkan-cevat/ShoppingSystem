@@ -20,7 +20,7 @@ public class ProductInCartDAOImpl implements ProductInCartDAO {
         Session session = sessionFactory.openSession();
         try {
             transaction = session.beginTransaction();
-            String hql = "DELETE FROM productsincart pc WHERE pc.shoppingCart_cartId = :scId";
+            String hql = "DELETE FROM ProductsInCart pc WHERE pc.shoppingCart_cartId = :scId";
             Query q = session.createSQLQuery(hql).setParameter("scId",shoppingCartId);
             q.executeUpdate();
 

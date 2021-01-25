@@ -182,8 +182,8 @@ public class OrderDAOImpl implements OrderDAO {
         try {
             transaction = session.beginTransaction();
             String hql = "SELECT p.* FROM orders o "
-                    + "INNER JOIN productsincart pc ON o.shoppingCart_cartId = pc.shoppingCart_cartId "
-                    + "INNER JOIN product p ON pc.productId = p.productId "
+                    + "INNER JOIN ProductsInCart pc ON o.shoppingCart_cartId = pc.shoppingCart_cartId "
+                    + "INNER JOIN Product p ON pc.productId = p.productId "
                     + "WHERE o.user_userId = :uId AND o.shoppingCart_cartId = :scId";
             productList = session.createSQLQuery(hql).setParameter("uId",userId).setParameter("scId", cartId).list();
 

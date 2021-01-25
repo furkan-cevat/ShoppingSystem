@@ -40,7 +40,7 @@ public class ShoppingCartController {
         return id;
     }
 
-    @RequestMapping(value = "/addShoppingCart/{productId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/addShoppingCart/{productId}/{orderAmount}", method = RequestMethod.GET)
     public @ResponseBody long addShoppingCart(@CookieValue(value = "token") Long token,@PathVariable(value = "productId") long productId,@PathVariable(value = "orderAmount") long orderAmount) {
         ShoppingCart sc = new ShoppingCart();
 
@@ -48,7 +48,7 @@ public class ShoppingCartController {
 
         long cartId = shoppingService.getCartIdByUserId(userId);
 
-        sc = shoppingService.getCartByUserId(userId);
+        sc = shoppingService.getCartByUserId(cartId);
 
 
         String resultMessage = shoppingService.addShoppingChart(sc,productId,orderAmount);

@@ -3,7 +3,6 @@ package com.deneme.service.impl;
 import com.deneme.dao.UserDAO;
 import com.deneme.model.Order;
 import com.deneme.model.User;
-import com.deneme.repository.UserRepository;
 import com.deneme.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

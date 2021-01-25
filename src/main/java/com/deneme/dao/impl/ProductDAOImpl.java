@@ -148,7 +148,7 @@ public class ProductDAOImpl implements ProductDAO {
             transaction = session.beginTransaction();
 
             String hql = "UPDATE Product p SET p.stock=p.stock - "
-                    + "(SELECT pc.orderAmount FROM productsincart pc "
+                    + "(SELECT pc.orderAmount FROM ProductsInCart pc "
                     + "WHERE pc.productId = :pId AND pc.shoppingCart_cartId = :cId) "
                     + "WHERE p.productId = :pId";
 
@@ -174,7 +174,7 @@ public class ProductDAOImpl implements ProductDAO {
             transaction = session.beginTransaction();
 
             String hql = "UPDATE Product p SET p.stock=p.stock + "
-                    + "(SELECT pc.orderAmount FROM productsincart pc "
+                    + "(SELECT pc.orderAmount FROM ProductsInCart pc "
                     + "WHERE pc.productId = :pId AND pc.shoppingCart_cartId = :cId) "
                     + "WHERE p.productId = :pId";
 

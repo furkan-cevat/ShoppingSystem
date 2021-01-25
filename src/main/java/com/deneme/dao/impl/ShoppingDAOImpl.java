@@ -42,6 +42,7 @@ public class ShoppingDAOImpl implements ShoppingDAO {
             pc.setOrderAmount(orderAmount);
             pc.setProductId(productId);
             session.save(pc);
+            message = "Başarılı şeklide sepete eklendi";
 
             transaction.commit();
 

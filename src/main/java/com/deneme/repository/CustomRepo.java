@@ -11,9 +11,9 @@ import java.util.List;
 @Repository
 public interface CustomRepo extends JpaRepository<User,Long>{
 
-    @Query(value = "SELECT u.* FROM user u "
+        @Query(value = "SELECT u.* FROM User u "
             + "INNER JOIN orders o ON o.user_userId = u.userId "
-            + "INNER JOIN productsincart pc ON o.shoppingCart_cartId = pc.shoppingCart_cartId "
+            + "INNER JOIN ProductsInCart pc ON o.shoppingCart_cartId = pc.shoppingCart_cartId "
             + "WHERE pc.productId = :pId",nativeQuery = true)
     List<Object[]> customQuery1(@Param("pId") long productId);
 

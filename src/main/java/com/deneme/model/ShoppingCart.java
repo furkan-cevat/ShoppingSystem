@@ -17,6 +17,9 @@ public class ShoppingCart {
     @JsonIgnore
     private User user;
 
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "shoppingCart")
+    private Set<ProductsInCart> ProductsInCart = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
@@ -25,10 +28,7 @@ public class ShoppingCart {
 
 
 
-    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            mappedBy = "shoppingCart")
-    private Set<ProductsInCart> ProductsInCart = new HashSet<>();
+
 
 
 
