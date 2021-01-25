@@ -7,6 +7,9 @@ import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RequestMapping("/categoryApi")
 @Controller
 public class CategoryController {
@@ -19,26 +22,30 @@ public class CategoryController {
     @RequestMapping(value = "/newCategory", method = RequestMethod.POST, consumes = "application/json")
     public @ResponseBody
     long newCategory(@RequestBody Category category) {
-        long id = categoryService.createCategory(category);
+        long id = categoryService.addCategory(category);
         logger.info("Category adding. id : " + id);
         return id;
     }
 
-    @RequestMapping(value = "/editCategory/{categoryId}", method = RequestMethod.PUT, consumes = "application/json")
+    @RequestMapping(value = "/editCategory", method = RequestMethod.PUT, consumes = "application/json",produces = "application/json")
     public @ResponseBody
-    Category updateCategory(@PathVariable(value = "categoryId") long id, @RequestBody Category category) {
-        Category categoryTemp = new Category();
-        categoryTemp.setCategoryId(category.getCategoryId());
-        categoryTemp.setName(category.getName());
-        logger.info("Category updating. : " + categoryTemp);
-        return categoryService.updateCategory(categoryTemp);
+    Category updateCategory(@RequestBody Category category) {
+        logger.info("Category updating. id: " + category.getCategoryId());
+        return categoryService.updateCategory(category);
 
     }
     @RequestMapping(value = "/removeCategory/{categoryId}", method = RequestMethod.DELETE)
     @ResponseBody
     public void deleteCategory(@PathVariable(value = "categoryId") long id) {
         logger.info("User deleting. Id : " + id);
-        categoryService.deleteCategory(id);
+        categoryService.deleteById(id);
+    }
+
+    @RequestMapping(value = "/findAllCategory", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Category> findAllCategory() {
+        logger.info("All Categories");
+        return categoryService.allCategories();
     }
 
 

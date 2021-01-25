@@ -41,4 +41,9 @@ public class CustomRepoServiceImpl implements CustomRepoService {
 
         return users;
     }
+
+    @Override
+    public List<User> findByUsername(String username) {
+        return customRepo.findByUsername(username);
+    }
 }

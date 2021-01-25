@@ -29,4 +29,16 @@ public class CustomJPAController {
         return customRepoService.customQuery1(productId);
 
     }
+
+    @RequestMapping(value = "/findByUserName/{username}", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody
+    List<User> findByUserName(@PathVariable("username") String username) {
+
+        logger.info("username : " + username);
+
+        return customRepoService.findByUsername(username);
+
+    }
+
+
 }

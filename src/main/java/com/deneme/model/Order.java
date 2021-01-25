@@ -11,14 +11,12 @@ import java.util.Set;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @JsonIgnore
     private long orderId;
 
     private String paymentMethod;
 
     private String address;
 
-    @JsonIgnore
     private String status;
 
 

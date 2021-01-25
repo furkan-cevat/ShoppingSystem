@@ -7,21 +7,15 @@ import com.deneme.model.Product;
 
 public interface ProductService {
 
-    Product createProduct(Product product,long categoryId);
-
+    Long createProduct(Product product, long categoryId);
     void deleteProduct(long productId);
-
     Product updateProduct(Product product);
-
     List<Product> listAllProduct();
-
-    void addShoppingChart(Product product);
+    Product getProductById(long productId);
 
     void updateProductCartId(long cartId);
 
     long getProductStock(long productId);
-
-    Product getProductById(long productId);
 
     void setStockValue(long productId,long cartId);
 

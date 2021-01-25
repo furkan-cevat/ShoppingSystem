@@ -2,10 +2,12 @@ package com.deneme.service.impl;
 
 import com.deneme.dao.OrderDAO;
 import com.deneme.dao.ProductDAO;
-import com.deneme.model.Order;
-import com.deneme.model.Product;
+import com.deneme.model.*;
+import com.deneme.repository.OrderRepo;
 import com.deneme.service.OrderService;
 import com.deneme.service.ProductService;
+import com.deneme.service.ShoppingService;
+import com.deneme.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,57 +20,43 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
-    private OrderDAO orderDAO;
-
-
-    @Override
-    public long createOrder(Order order) {
-        return orderDAO.createOrder(order);
-    }
+    private OrderRepo orderRepo;
 
     @Override
-    public void deleteOrder(long orderId) {
-        orderDAO.deleteOrder(orderId);
+    public long getOrder(Order order,User user,ShoppingCart shoppingCart) {
+        Order orderTemp = new Order();
+        orderTemp.setAddress(order.getAddress());
+        orderTemp.setPaymentMethod(order.getPaymentMethod());
+        orderTemp.setStatus(order.getStatus());
+        orderTemp.setUser(user);
+        orderTemp.setShoppingCart(shoppingCart);
+        orderRepo.saveAndFlush(orderTemp);
+        return orderTemp.getOrderId();
     }
 
-    @Override
-    public Order updateOrder(Order order) {
-        return orderDAO.updateOrder(order);
-    }
-
-    @Override
-    public List<Order> listAllOrder() {
-        return orderDAO.listAllOrder();
-    }
-
-    @Override
-    public long getOrder(Order order) {
-        return orderDAO.getOrder(order);
-    }
-
-    @Override
-    public void updateOrderAfter(long userId, long cartId) {
-        orderDAO.updateOrderAfter(userId,cartId);
-    }
+   // @Override
+   // public void updateOrderAfter(long userId, long cartId) {
+        //orderRepo.updateOrderAfter(userId,cartId);
+   // }
 
     @Override
     public void changeOrderAddress(long userId, long cartId, String address) {
-        orderDAO.changeOrderAddress(userId,cartId,address);
+        orderRepo.changeOrderAddress(address,userId,cartId);
     }
 
     @Override
     public void cancelledOrder(long userId) {
-        orderDAO.cancelledOrder(userId);
+        orderRepo.cancelledOrder(userId);
     }
 
     @Override
     public String orderTracking(long userId) {
-        return orderDAO.orderTracking(userId);
+        return orderRepo.orderTracking(userId);
     }
     @Override
     public List<Product> getProductsInOrder(long userId, long cartId) {
         List<Product> products = new ArrayList<Product>();
-        List<Object[]> list = orderDAO.getProductsInOrder(userId,cartId);
+        List<Object[]> list = orderRepo.getProductsInOrder(userId,cartId);
         for (Object[] product : list) {
             Product product2 = new Product();
 
@@ -90,6 +78,11 @@ public class OrderServiceImpl implements OrderService {
         }
 
         return products;
+    }
+
+    @Override
+    public List<Order> getLoginOrders(long userId) {
+        return orderRepo.getLoginOrders(userId);
     }
 
 }

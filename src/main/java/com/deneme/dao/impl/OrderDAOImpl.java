@@ -83,7 +83,7 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
-    public long getOrder(Order order) {
+    public long getOrder(Order order) { //Sipariş ver
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         Order orderTemp = new Order();

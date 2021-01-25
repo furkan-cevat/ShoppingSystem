@@ -2,8 +2,12 @@ package com.deneme.controller;
 
 import com.deneme.config.Tokens;
 import com.deneme.dao.UserDAO;
+import com.deneme.model.ProductsInCart;
 import com.deneme.model.ShoppingCart;
+import com.deneme.repository.UserRepo;
+import com.deneme.service.ProductInCartService;
 import com.deneme.service.ShoppingService;
+import com.deneme.service.UserService;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,16 +29,18 @@ public class ShoppingCartController {
     private ShoppingService shoppingService;
 
     @Autowired
-    private UserDAO userDAO;
+    private ProductInCartService productInCartService;
+
+    @Autowired
+    private UserService userService;
 
     private static final Logger logger = Logger.getLogger(ShoppingCartController.class);
 
     @RequestMapping(value = "/newChart", method = RequestMethod.GET)
     public @ResponseBody long newCart(@CookieValue(value = "token") Long token) {
         ShoppingCart sc = new ShoppingCart();
-
         long userId = (long) tokens.getTokensMap().get(token);
-        sc.setUser(userDAO.getUserById(userId));
+        sc.setUser(userService.getUserById(userId));
         long id = shoppingService.newChart(sc);
         logger.info("Shopping Cart adding. id : " + id);
         return id;
@@ -51,9 +57,9 @@ public class ShoppingCartController {
         sc = shoppingService.getCartByUserId(cartId);
 
 
-        String resultMessage = shoppingService.addShoppingChart(sc,productId,orderAmount);
+        String resultMessage = productInCartService.addShoppingChart(sc,productId,orderAmount);
 
-        logger.info("Shopping Cart adding productId: " + productId);
+        logger.info("Shopping Cart adding productId: " + productId + "result : " + resultMessage);
         return productId;
     }
 

@@ -1,5 +1,7 @@
 package com.deneme.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,6 +19,7 @@ public class Category {
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "category")
+    @JsonIgnore
     private Set<Product> products = new HashSet<Product>();
 
     public Set<Product> getProducts() {

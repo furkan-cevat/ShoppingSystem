@@ -3,6 +3,7 @@ package com.deneme.controller;
 import com.deneme.config.Tokens;
 import com.deneme.model.Order;
 import com.deneme.model.User;
+import com.deneme.service.OrderService;
 import com.deneme.service.UserService;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private OrderService orderService;
+
     @RequestMapping(value = "newUser", method = RequestMethod.POST, consumes = "application/json")
     public @ResponseBody
     long newUser(@RequestBody User user) {
-        long id = userService.createUser(user);
+        long id = userService.addUser(user);
         logger.info("User adding. id : " + id);
         return id;
     }
@@ -46,7 +50,7 @@ public class UserController {
     @ResponseBody
     public void deleteUser(@PathVariable(value = "userId") long id) {
         logger.info("User deleting. Id : " + id);
-        userService.deleteUser(id);
+        userService.deleteByIdUser(id);
     }
 
     @RequestMapping(value = { "getAllUser",
@@ -68,7 +72,7 @@ public class UserController {
     public List<Order> getLoginOrders(@CookieValue(value = "token") Long token) {
 
         long userId = (long) tokens.getTokensMap().get(token);
-        return userService.getLoginOrders(userId);
+        return orderService.getLoginOrders(userId);
     }
 
 }

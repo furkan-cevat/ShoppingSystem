@@ -19,28 +19,22 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @RequestMapping(value = "/newProduct/{categoryId}", method = RequestMethod.POST, consumes = "application/json")
+    @RequestMapping(value = "/createProduct/{categoryId}", method = RequestMethod.POST, consumes = "application/json")
     public @ResponseBody
-    Product newProduct(@RequestBody Product product , @PathVariable(value = "categoryId") long categoryId) {
+    Long newProduct(@RequestBody Product product , @PathVariable(value = "categoryId") long categoryId) {
 
 
-        Product p = productService.createProduct(product,categoryId);
-        logger.info("Product adding. id : " + p.getProductId());
+        Long p = productService.createProduct(product,categoryId);
+        logger.info("Product adding. id : " + p);
         return p;
     }
 
     @RequestMapping(value = "/editProduct/{productId}", method = RequestMethod.PUT, consumes = "application/json")
     public @ResponseBody
     Product updateProduct(@PathVariable(value = "productId") long id, @RequestBody Product product) {
-        Product productTemp = new Product();
 
-        productTemp.setProductId(product.getProductId());
-        productTemp.setName(product.getName());
-        productTemp.setStock(product.getStock());
-        productTemp.setCategory(product.getCategory());
-
-        logger.info("Product updating. : " + productTemp);
-        return productService.updateProduct(productTemp);
+        logger.info("Product updating. : " + product.getProductId());
+        return productService.updateProduct(product);
 
     }
     @RequestMapping(value = "/removeProduct/{productId}", method = RequestMethod.DELETE)

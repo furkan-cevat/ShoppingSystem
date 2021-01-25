@@ -11,4 +11,7 @@ import java.util.List;
 public interface CustomRepoService {
 
     List<User> customQuery1(long productId);
+
+    List<User> findByUsername(String username);
+
 }

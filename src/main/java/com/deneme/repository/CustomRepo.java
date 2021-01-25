@@ -18,6 +18,9 @@ public interface CustomRepo extends JpaRepository<User,Long>{
     List<Object[]> customQuery1(@Param("pId") long productId);
 
 
+        List<User> findByUsername(String username);
+
+
 
 
 }

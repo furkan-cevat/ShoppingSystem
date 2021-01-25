@@ -3,10 +3,9 @@ package com.deneme.controller;
 import com.deneme.config.Tokens;
 import com.deneme.model.Order;
 import com.deneme.model.Product;
-import com.deneme.service.OrderService;
-import com.deneme.service.ProductInCartService;
-import com.deneme.service.ProductService;
-import com.deneme.service.ShoppingService;
+import com.deneme.model.ShoppingCart;
+import com.deneme.model.User;
+import com.deneme.service.*;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +34,10 @@ public class OrderController {
     @Autowired
     private ProductInCartService productInCartService;
 
+    @Autowired
+    private UserService userService;
+
+
 
     @RequestMapping(value = "/createOrder", method = RequestMethod.POST, consumes = "application/json")
     public @ResponseBody
@@ -44,9 +47,9 @@ public class OrderController {
 
         long cartId = shoppingService.getCartIdByUserId(userId);
 
-        orderService.getOrder(order);
+        //orderService.getOrder(order);
 
-        orderService.updateOrderAfter(userId,cartId);
+        //orderService.updateOrderAfter(userId,cartId);
 
         logger.info("Order getting. userId : " + userId);
     }
@@ -61,9 +64,12 @@ public class OrderController {
 
         order.setStatus("Sipariş Alındı.");
 
-        long orderId = orderService.getOrder(order);
+        User user = userService.getUserById(userId);
 
-        orderService.updateOrderAfter(userId,cartId);
+        ShoppingCart shoppingCart = shoppingService.getCartByUserId(cartId);
+
+
+        long orderId = orderService.getOrder(order,user,shoppingCart);
 
         List<Product> listProduct = orderService.getProductsInOrder(userId,cartId);
 
