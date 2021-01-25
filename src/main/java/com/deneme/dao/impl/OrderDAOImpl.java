@@ -83,7 +83,7 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
-    public void getOrder(Order order) {
+    public long getOrder(Order order) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         Order orderTemp = new Order();
@@ -91,8 +91,9 @@ public class OrderDAOImpl implements OrderDAO {
         orderTemp.setPaymentMethod(order.getPaymentMethod());
         orderTemp.setStatus(order.getStatus());
 
-        session.save(orderTemp);
+        long orderId = (long)session.save(orderTemp);
         session.getTransaction().commit();
+        return orderId;
     }
 
     @Override
@@ -172,6 +173,31 @@ public class OrderDAOImpl implements OrderDAO {
             session.close();
         }
         return orderStatus.toString();
+    }
+
+    @Override
+    public List<Object[]> getProductsInOrder(long userId, long cartId) {
+        List<Object[]> productList = null;
+        Session session = sessionFactory.openSession();
+        try {
+            transaction = session.beginTransaction();
+            String hql = "SELECT p.* FROM orders o "
+                    + "INNER JOIN productsincart pc ON o.shoppingCart_cartId = pc.shoppingCart_cartId "
+                    + "INNER JOIN product p ON pc.productId = p.productId "
+                    + "WHERE o.user_userId = :uId AND o.shoppingCart_cartId = :scId";
+            productList = session.createSQLQuery(hql).setParameter("uId",userId).setParameter("scId", cartId).list();
+
+            transaction.commit();
+
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return productList;
+
     }
 
 

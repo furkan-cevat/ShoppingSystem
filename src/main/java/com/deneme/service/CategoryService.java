@@ -10,11 +10,11 @@ import java.util.List;
 
 public interface CategoryService {
 
-    public long createCategory(Category category);
+    long createCategory(Category category);
 
-    public void deleteCategory(long categoryId);
+    void deleteCategory(long categoryId);
 
-    public Category updateCategory(Category category);
+    Category updateCategory(Category category);
 
 
 

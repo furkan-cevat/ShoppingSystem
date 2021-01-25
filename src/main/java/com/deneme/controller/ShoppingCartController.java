@@ -41,17 +41,17 @@ public class ShoppingCartController {
     }
 
     @RequestMapping(value = "/addShoppingCart/{productId}", method = RequestMethod.GET)
-    public @ResponseBody long addShoppingCart(@CookieValue(value = "token") Long token,@PathVariable(value = "productId") long productId) {
+    public @ResponseBody long addShoppingCart(@CookieValue(value = "token") Long token,@PathVariable(value = "productId") long productId,@PathVariable(value = "orderAmount") long orderAmount) {
         ShoppingCart sc = new ShoppingCart();
 
         long userId = (long) tokens.getTokensMap().get(token);
 
-        long cartId = shoppingService.getCartByUserId(userId);
+        long cartId = shoppingService.getCartIdByUserId(userId);
+
+        sc = shoppingService.getCartByUserId(userId);
 
 
-        System.out.println(cartId);
-
-        shoppingService.addShoppingChart(cartId,productId);
+        String resultMessage = shoppingService.addShoppingChart(sc,productId,orderAmount);
 
         logger.info("Shopping Cart adding productId: " + productId);
         return productId;

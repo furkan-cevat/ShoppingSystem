@@ -25,8 +25,6 @@ public class SecurityController {
     @Autowired
     private Tokens tokens;
 
-    static Object loginKullaniciID;
-
     @RequestMapping(value = "/login/{username}/{password}", method = RequestMethod.GET)
     @ResponseBody
     public void login(HttpServletResponse response, @PathVariable(value = "username") String username ,
@@ -50,8 +48,7 @@ public class SecurityController {
     }
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     @ResponseBody
-    public void logout() {
-        loginKullaniciID=null;
+    public void logout(HttpServletResponse response) {
     }
 
 }

@@ -6,15 +6,15 @@ import com.deneme.model.User;
 import java.util.List;
 
 public interface UserDAO {
-    public long createUser(User user);
+    long createUser(User user);
 
-    public void deleteUser(long userId);
+    void deleteUser(long userId);
 
-    public User updateUser(User user);
+    User updateUser(User user);
 
-    public List<User> listAllUser();
+    List<User> listAllUser();
 
-    public User getUserById(long id);
+    User getUserById(long id);
 
     boolean findLoginUser(String username, String password);
 

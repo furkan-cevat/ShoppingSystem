@@ -2,8 +2,9 @@ package com.deneme.service;
 
 import com.deneme.model.Category;
 import com.deneme.model.Order;
+import com.deneme.model.Product;
 
-;import java.util.List;
+import java.util.List;
 
 
 public interface OrderService {
@@ -16,7 +17,7 @@ public interface OrderService {
 
     List<Order> listAllOrder();
 
-    void getOrder(Order order);
+    long getOrder(Order order);
 
     void updateOrderAfter(long userId,long cartId);
 
@@ -26,4 +27,6 @@ public interface OrderService {
 
 
     String orderTracking(long userId);
+
+    List<Product> getProductsInOrder(long userId, long cartId);
 }

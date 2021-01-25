@@ -3,6 +3,7 @@ package com.deneme.dao.impl;
 import com.deneme.dao.ShoppingDAO;
 import com.deneme.dao.UserDAO;
 import com.deneme.model.Product;
+import com.deneme.model.ProductsInCart;
 import com.deneme.model.ShoppingCart;
 import com.deneme.model.User;
 import org.hibernate.Session;
@@ -31,28 +32,32 @@ public class ShoppingDAOImpl implements ShoppingDAO {
         return cart1;
     }
 
-    public void addShoppingChart(long cartId,long productId){
+    public String addShoppingChart(ShoppingCart shoppingCart,long productId,long orderAmount){
+        String message=null;
         Session session = sessionFactory.openSession();
         try {
             transaction = session.beginTransaction();
-            String hql = "UPDATE Product SET shoppingCart_cartId=:id WHERE productId = :id2" +
-                         "   ";
-            Query q = session.createQuery(hql).setParameter("id", cartId).setParameter("id2",productId);
-            q.executeUpdate();
+            ProductsInCart pc = new ProductsInCart();
+            pc.setShoppingCart(shoppingCart);
+            pc.setOrderAmount(orderAmount);
+            pc.setProductId(productId);
+            session.save(pc);
 
             transaction.commit();
 
         } catch (Exception e) {
+            message = "Sepete eklenemedi";
             if (transaction != null) {
                 transaction.rollback();
             }
         } finally {
             session.close();
         }
+        return message;
 
     }
 
-    public long getCartByUserId(long userId) {
+    public long getCartIdByUserId(long userId) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         long id = (long) session.createQuery(
@@ -61,5 +66,18 @@ public class ShoppingDAOImpl implements ShoppingDAO {
         return id;
 
     }
+
+
+    public ShoppingCart getCartByUserId(long cartId) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        ShoppingCart sc = session.get(ShoppingCart.class, cartId);
+        session.getTransaction().commit();
+        return sc;
+
+    }
+
+
+
 
 }

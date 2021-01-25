@@ -16,8 +16,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userId;
 
-   ;
-
 
     private String username;
 
@@ -30,19 +28,20 @@ public class User {
     private ShoppingCart shoppingCart;
 
 
+
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "user")
     private Set<Order> orders = new HashSet<>();
 
+
     public Set<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(Set<Order> order) {
-        this.orders = order;
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
-
     public long getUserId() {
         return userId;
     }

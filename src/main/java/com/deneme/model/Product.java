@@ -21,9 +21,6 @@ public class Product {
     private Category category;
 
 
-    @ManyToOne
-    @JsonIgnore
-    private ShoppingCart shoppingCart;
 
 
     public String getName() {
@@ -62,11 +59,4 @@ public class Product {
         return productId;
     }
 
-    public ShoppingCart getShoppingCart() {
-        return shoppingCart;
-    }
-
-    public void setShoppingCart(ShoppingCart shoppingCart) {
-        this.shoppingCart = shoppingCart;
-    }
 }

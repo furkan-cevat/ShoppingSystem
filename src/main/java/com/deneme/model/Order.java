@@ -21,11 +21,6 @@ public class Order {
     @JsonIgnore
     private String status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
-    @JoinColumn(name = "user_userId")
-    private User user;
-
 
     @OneToOne(fetch = FetchType.LAZY)
     @JsonIgnore
@@ -33,8 +28,19 @@ public class Order {
 
 
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @JoinColumn(name = "user_userId")
+    private User user;
 
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
     public long getOrderId() {
         return orderId;
     }
@@ -67,13 +73,6 @@ public class Order {
         this.status = status;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
 
     public ShoppingCart getShoppingCart() {

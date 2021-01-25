@@ -18,19 +18,17 @@ public class ShoppingCart {
     private User user;
 
 
-    @OneToMany(cascade = CascadeType.ALL,
+    @OneToOne(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "shoppingCart")
-    private Set<Product> products = new HashSet<>();
-
-    @OneToOne
-    @JsonIgnore
     private Order order;
 
 
 
-
-
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "shoppingCart")
+    private Set<ProductsInCart> ProductsInCart = new HashSet<>();
 
 
 
@@ -50,13 +48,6 @@ public class ShoppingCart {
         this.user = user;
     }
 
-    public Set<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Set<Product> products) {
-        this.products = products;
-    }
 
     public Order getOrder() {
         return order;
@@ -64,5 +55,14 @@ public class ShoppingCart {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+
+    public Set<com.deneme.model.ProductsInCart> getProductsInCart() {
+        return ProductsInCart;
+    }
+
+    public void setProductsInCart(Set<com.deneme.model.ProductsInCart> productsInCart) {
+        ProductsInCart = productsInCart;
     }
 }

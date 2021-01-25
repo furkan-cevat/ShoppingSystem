@@ -2,13 +2,17 @@ package com.deneme.controller;
 
 import com.deneme.config.Tokens;
 import com.deneme.model.Order;
+import com.deneme.model.Product;
 import com.deneme.service.OrderService;
+import com.deneme.service.ProductInCartService;
 import com.deneme.service.ProductService;
 import com.deneme.service.ShoppingService;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequestMapping("/orderApi")
 @Controller
@@ -28,16 +32,17 @@ public class OrderController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private ProductInCartService productInCartService;
 
-    @RequestMapping(value = "/getOrder", method = RequestMethod.POST, consumes = "application/json")
+
+    @RequestMapping(value = "/createOrder", method = RequestMethod.POST, consumes = "application/json")
     public @ResponseBody
-    void newOrder(@CookieValue(value = "token") Long token, @RequestBody Order order) {
+    void createOrder(@CookieValue(value = "token") Long token, @RequestBody Order order) {
 
         long userId = (long) tokens.getTokensMap().get(token);
 
-        long cartId = shoppingService.getCartByUserId(userId);
-
-        order.setStatus("Sipariş Alındı.");
+        long cartId = shoppingService.getCartIdByUserId(userId);
 
         orderService.getOrder(order);
 
@@ -46,13 +51,44 @@ public class OrderController {
         logger.info("Order getting. userId : " + userId);
     }
 
+    @RequestMapping(value = "/getOrder", method = RequestMethod.POST, consumes = "application/json")
+    public @ResponseBody
+    List<Product> getOrder(@CookieValue(value = "token") Long token, @RequestBody Order order) {
+
+        long userId = (long) tokens.getTokensMap().get(token);
+
+        long cartId = shoppingService.getCartIdByUserId(userId);
+
+        order.setStatus("Sipariş Alındı.");
+
+        long orderId = orderService.getOrder(order);
+
+        orderService.updateOrderAfter(userId,cartId);
+
+        List<Product> listProduct = orderService.getProductsInOrder(userId,cartId);
+
+        for (Product product : listProduct) {
+            productService.setStockValue(product.getProductId(),cartId);
+        }
+
+
+
+        logger.info("Order getting. userId : " + userId);
+
+        return listProduct;
+    }
+
+
+
+
+
     @RequestMapping(value = "/changeOrderAddress/{address}", method = RequestMethod.GET)
     public @ResponseBody
     void changeOrderAddress(@CookieValue(value = "token") Long token ,@PathVariable(value = "address") String address) {
 
         long userId = (long) tokens.getTokensMap().get(token);
 
-        long cartId = shoppingService.getCartByUserId(userId);
+        long cartId = shoppingService.getCartIdByUserId(userId);
 
 
         orderService.changeOrderAddress(userId,cartId,address);
@@ -68,12 +104,18 @@ public class OrderController {
 
         long userId = (long) tokens.getTokensMap().get(token);
 
-        long cartId = shoppingService.getCartByUserId(userId);
+        long cartId = shoppingService.getCartIdByUserId(userId);
+
+        List<Product> listProduct = orderService.getProductsInOrder(userId,cartId);
+
+        for (Product product : listProduct) {
+            productService.setStockValueCancelled(product.getProductId(),cartId);
+        }
 
 
         orderService.cancelledOrder(userId);
 
-        productService.updateProductCartId(cartId);
+        productInCartService.clearProductInCart(cartId);
 
         logger.info("Order cancelling. userId : " + userId);
     }

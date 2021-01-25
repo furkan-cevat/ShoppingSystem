@@ -53,7 +53,7 @@ public class UserController {
             "/listAllUser" }, method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public List<User> listAllUser() {
-        System.out.println(SecurityController.loginKullaniciID);
+
 
 
 
@@ -71,6 +71,14 @@ public class UserController {
         return userService.getLoginOrders(userId);
     }
 
+
+
+    @RequestMapping(value = "/exampleQuery/{productId}", method = RequestMethod.GET,produces = "application/json")
+    @ResponseBody
+    public List<User> exampleQuery(@PathVariable("productId") long pId) {
+
+        return userService.exampleQuery(pId);
+    }
 
 
 

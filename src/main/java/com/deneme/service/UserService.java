@@ -10,15 +10,16 @@ import java.util.List;
 
 public interface UserService {
 
-    public long createUser(User user);
+    long createUser(User user);
 
-    public void deleteUser(long userId);
+    void deleteUser(long userId);
 
-    public User updateUser(User user);
+    User updateUser(User user);
 
-    public boolean findLoginUser(String username,String password);
+    boolean findLoginUser(String username,String password);
 
-    public List<User> listAllUser();
+    List<User> listAllUser();
 
     List<Order> getLoginOrders(long userId);
+
 }

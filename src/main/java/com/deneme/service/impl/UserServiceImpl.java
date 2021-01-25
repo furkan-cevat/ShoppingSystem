@@ -3,6 +3,7 @@ package com.deneme.service.impl;
 import com.deneme.dao.UserDAO;
 import com.deneme.model.Order;
 import com.deneme.model.User;
+import com.deneme.repository.UserRepository;
 import com.deneme.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.util.List;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
+
 
     @Autowired
     private UserDAO userDAO;
@@ -45,4 +47,5 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Order> getLoginOrders(long userId) {
         return userDAO.getLoginOrders(userId);    }
+
 }

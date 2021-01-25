@@ -62,4 +62,21 @@ public class ProductServiceImpl implements ProductService {
     public Product getProductById(long productId) {
         return productDAO.getProductById(productId);
     }
+
+    @Override
+    public long getProductStock(long productId) {
+        return productDAO.getProductStock(productId);
+    }
+
+    @Override
+    public void setStockValue(long productId,long cartId) {
+        productDAO.setStockValue(productId,cartId);
+
+    }
+
+    @Override
+    public void setStockValueCancelled(Long productId, long cartId) {
+        productDAO.setStockValueCancelled(productId,cartId);
+
+    }
 }
