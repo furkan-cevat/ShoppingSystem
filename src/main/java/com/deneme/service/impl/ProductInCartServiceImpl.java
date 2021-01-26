@@ -1,5 +1,9 @@
 package com.deneme.service.impl;
 
+<<<<<<< HEAD
+=======
+import com.deneme.dao.ProductInCartDAO;
+>>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
 import com.deneme.model.Product;
 import com.deneme.model.ProductsInCart;
 import com.deneme.model.ShoppingCart;
@@ -20,6 +24,10 @@ public class ProductInCartServiceImpl implements ProductInCartService {
     @Autowired
     private ProductService productService;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
     @Override
     public void clearProductInCart(long shoppingCartId) {
         productInCartRepo.clearProductInCart(shoppingCartId);

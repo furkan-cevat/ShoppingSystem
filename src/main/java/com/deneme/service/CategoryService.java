@@ -11,5 +11,13 @@ public interface CategoryService {
     Category updateCategory(Category category);
     Category findByIdCategory(long categoryId);
     List<Category> allCategories();
+<<<<<<< HEAD
+=======
+
+
+
+
+
+>>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
 
 }

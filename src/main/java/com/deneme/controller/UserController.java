@@ -30,8 +30,14 @@ public class UserController {
     @RequestMapping(value = "newUser", method = RequestMethod.POST, consumes = "application/json")
     public @ResponseBody
     long newUser(@RequestBody User user) {
+<<<<<<< HEAD
         logger.info("User adding.");
         return userService.addUser(user);
+=======
+        long id = userService.addUser(user);
+        logger.info("User adding. id : " + id);
+        return id;
+>>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
     }
 
     @RequestMapping(value = "editUser/{userId}", method = RequestMethod.PUT, consumes = "application/json")
@@ -55,6 +61,13 @@ public class UserController {
     @RequestMapping(value ="/listAllUser", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public List<User> listAllUser() {
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
         logger.info("All users.");
         return userService.listAllUser();
     }

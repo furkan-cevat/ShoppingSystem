@@ -35,6 +35,21 @@ public class Order {
     private User user;
 
 
+<<<<<<< HEAD
+    public User getUser() {
+        return user;
+    }
+=======
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @JoinColumn(name = "user_userId")
+    private User user;
+>>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public User getUser() {
         return user;
     }
@@ -42,7 +57,6 @@ public class Order {
     public void setUser(User user) {
         this.user = user;
     }
-
     public long getOrderId() {
         return orderId;
     }
@@ -75,6 +89,10 @@ public class Order {
         this.status = status;
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
 
     public ShoppingCart getShoppingCart() {
         return shoppingCart;

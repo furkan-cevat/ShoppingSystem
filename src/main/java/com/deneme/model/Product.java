@@ -23,6 +23,11 @@ public class Product {
     private Category category;
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
     public String getName() {
         return name;
     }

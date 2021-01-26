@@ -37,6 +37,12 @@ public class HibernateConfig {
     @Value("com")
     private String ENTITYMANAGER_PACKAGES_TO_SCAN;
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
     @Bean(name="entityManagerFactory")
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();

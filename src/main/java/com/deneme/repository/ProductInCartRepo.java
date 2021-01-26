@@ -14,4 +14,8 @@ public interface ProductInCartRepo extends JpaRepository<ProductsInCart,Long> {
      @Query(value = "DELETE FROM ProductsInCart pc WHERE pc.shoppingCart_cartId = :scId",nativeQuery = true)
      void clearProductInCart(@Param("scId") long shoppingCartId);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
 }
