@@ -1,10 +1,8 @@
 package com.deneme.service.impl;
 
-import com.deneme.dao.CategoryDAO;
-import com.deneme.dao.ProductDAO;
 import com.deneme.model.Category;
 import com.deneme.model.Product;
-import com.deneme.model.User;
+import com.deneme.repository.ProductRepo;
 import com.deneme.service.CategoryService;
 import com.deneme.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,48 +16,71 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
-    private ProductDAO productDAO;
+    private ProductRepo productRepo;
 
     @Autowired
-    private CategoryDAO categoryDAO;
+    private CategoryService categoryService;
 
 
     @Override
-    public Product createProduct(Product product,long categoryId) {
-        Category category = categoryDAO.findByIdCategory(categoryId);
+    public Long createProduct(Product product, long categoryId) {
+        Category category = categoryService.findByIdCategory(categoryId);
+        Product product1 = new Product();
+        product1.setName(product.getName());
+        product1.setStock(product.getStock());
+        product1.setCategory(category);
+        productRepo.save(product1);
+        return product1.getProductId();
 
-
-
-        return productDAO.createProduct(product,category);
     }
 
     @Override
     public void deleteProduct(long productId) {
-        productDAO.deleteProduct(productId);
+        //Product product1 = getProductById(productId);
+        productRepo.deleteById(productId);
     }
 
     @Override
     public Product updateProduct(Product product) {
-        return productDAO.updateProduct(product);
+        Product product1 = getProductById(product.getProductId());
+        Category category1 = categoryService.findByIdCategory(product1.getCategory().getCategoryId());
+        product1.setName(product.getName());
+        product1.setStock(product.getStock());
+        product1.setCategory(category1);
+        productRepo.save(product1);
+        return product1;
+
     }
 
     @Override
     public List<Product> listAllProduct() {
-        return productDAO.listAllProduct();
-    }
-
-    @Override
-    public void addShoppingChart(Product product) {
-        productDAO.updateProduct(product);
-    }
-
-    @Override
-    public void updateProductCartId(long cartId) {
-        productDAO.updateProductCartId(cartId);
+        return productRepo.findAll();
     }
 
     @Override
     public Product getProductById(long productId) {
-        return productDAO.getProductById(productId);
+        return productRepo.findById(productId).orElse(null);
     }
+
+    @Override
+    public void updateProductCartId(long cartId) {
+        productRepo.updateProductCartId(cartId,0);
+    }
+
+    @Override
+    public long getProductStock(long productId) {
+        return productRepo.findById(productId).orElse(null).getStock();
+    }
+
+    @Override
+    public void setStockValue(long productId,long cartId) {
+        productRepo.setStockValue(productId,cartId);
+    }
+
+    @Override
+    public void setStockValueCancelled(Long productId, long cartId) {
+        productRepo.setStockValueCancelled(productId,cartId);
+
+    }
+
 }

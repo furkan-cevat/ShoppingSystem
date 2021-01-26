@@ -1,8 +1,7 @@
 package com.deneme.service.impl;
 
-import com.deneme.dao.UserDAO;
-import com.deneme.model.Order;
 import com.deneme.model.User;
+import com.deneme.repository.UserRepo;
 import com.deneme.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,34 +14,60 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserDAO userDAO;
+    private UserRepo userRepo;
 
     @Override
-    public long createUser(User user) {
-        return userDAO.createUser(user);
+    public long addUser(User user) {
+        User user1 = new User();
+        user1.setUserId(user.getUserId());
+        user1.setUsername(user.getUsername());
+        user1.setPassword(user.getPassword());
+        userRepo.save(user1);
+        return user1.getUserId();
     }
 
     @Override
-    public void deleteUser(long userId) {
-        userDAO.deleteUser(userId);
+    public void deleteByIdUser(long userId) {
+        User user1 = getUserById(userId);
+        userRepo.deleteById(userId);
+
     }
 
     @Override
     public User updateUser(User user) {
-        return userDAO.updateUser(user);
-    }
-
-    @Override
-    public boolean findLoginUser(String username, String password) {
-        return userDAO.findLoginUser(username,password);
+        User user1 = getUserById(user.getUserId());
+        user1.setUsername(user.getUsername());
+        user1.setPassword(user.getPassword());
+        userRepo.save(user1);
+        return user1;
     }
 
     @Override
     public List<User> listAllUser() {
-        return userDAO.listAllUser();
+        return userRepo.findAll();
     }
 
     @Override
-    public List<Order> getLoginOrders(long userId) {
-        return userDAO.getLoginOrders(userId);    }
+    public User getUserById(long userId) {
+        return userRepo.getUserById(userId).get(0);
+    }
+    @Override
+    public boolean findLoginUser(String username, String password) {
+        boolean b = false;
+        long id = userRepo.findLoginUser(username,password);
+        if(id!=0){
+            b=true;
+        }
+        return b;
+    }
+    @Override
+    public long getLoginUserId(String username, String password) {
+        return userRepo.getLoginUserId(username,password);
+    }
+
+
+
+
+
+
 }

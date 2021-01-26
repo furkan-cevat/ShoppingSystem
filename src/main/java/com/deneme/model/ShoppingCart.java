@@ -2,7 +2,14 @@ package com.deneme.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
+import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,16 +24,14 @@ public class ShoppingCart {
     @JsonIgnore
     private User user;
 
-
     @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "shoppingCart")
+    private Set<ProductsInCart> ProductsInCart = new HashSet<>();
+
+    @OneToOne(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "shoppingCart")
-    private Set<Product> products = new HashSet<>();
-
-    @OneToOne
-    @JsonIgnore
     private Order order;
-
 
 
 
@@ -50,13 +55,6 @@ public class ShoppingCart {
         this.user = user;
     }
 
-    public Set<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Set<Product> products) {
-        this.products = products;
-    }
 
     public Order getOrder() {
         return order;
@@ -64,5 +62,14 @@ public class ShoppingCart {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+
+    public Set<com.deneme.model.ProductsInCart> getProductsInCart() {
+        return ProductsInCart;
+    }
+
+    public void setProductsInCart(Set<com.deneme.model.ProductsInCart> productsInCart) {
+        ProductsInCart = productsInCart;
     }
 }

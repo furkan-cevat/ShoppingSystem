@@ -2,9 +2,11 @@ package com.deneme.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.ManyToOne;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Product {
@@ -19,11 +21,6 @@ public class Product {
     @ManyToOne
     @JsonIgnore
     private Category category;
-
-
-    @ManyToOne
-    @JsonIgnore
-    private ShoppingCart shoppingCart;
 
 
     public String getName() {
@@ -51,9 +48,6 @@ public class Product {
     }
 
 
-
-
-
     public void setProductId(Long productId) {
         this.productId = productId;
     }
@@ -62,11 +56,4 @@ public class Product {
         return productId;
     }
 
-    public ShoppingCart getShoppingCart() {
-        return shoppingCart;
-    }
-
-    public void setShoppingCart(ShoppingCart shoppingCart) {
-        this.shoppingCart = shoppingCart;
-    }
 }

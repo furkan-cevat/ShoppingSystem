@@ -41,7 +41,7 @@ public class ProductDAOImpl implements ProductDAO {
             session.close();
         }
 
-    return null;
+        return null;
 
 
     }
@@ -130,6 +130,67 @@ public class ProductDAOImpl implements ProductDAO {
         Product p = session.get(Product.class, productId);
         session.getTransaction().commit();
         return p;
+    }
+
+    @Override
+    public long getProductStock(long productId) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Product product = session.get(Product.class, productId);
+        session.getTransaction().commit();
+        return product.getStock();
+    }
+
+    @Override
+    public void setStockValue(long productId, long cartId) {
+        Session session = sessionFactory.openSession();
+        try {
+            transaction = session.beginTransaction();
+
+            String hql = "UPDATE Product p SET p.stock=p.stock - "
+                    + "(SELECT pc.orderAmount FROM ProductsInCart pc "
+                    + "WHERE pc.productId = :pId AND pc.shoppingCart_cartId = :cId) "
+                    + "WHERE p.productId = :pId";
+
+            Query q = session.createSQLQuery(hql).setParameter("cId", cartId)
+                    .setParameter("pId",productId);
+            q.executeUpdate();
+
+            transaction.commit();
+
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void setStockValueCancelled(Long productId, long cartId) {
+        Session session = sessionFactory.openSession();
+        try {
+            transaction = session.beginTransaction();
+
+            String hql = "UPDATE Product p SET p.stock=p.stock + "
+                    + "(SELECT pc.orderAmount FROM ProductsInCart pc "
+                    + "WHERE pc.productId = :pId AND pc.shoppingCart_cartId = :cId) "
+                    + "WHERE p.productId = :pId";
+
+            Query q = session.createSQLQuery(hql).setParameter("cId", cartId)
+                    .setParameter("pId",productId);
+            q.executeUpdate();
+
+            transaction.commit();
+
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            session.close();
+        }
     }
 
 

@@ -5,21 +5,23 @@ import com.deneme.model.Order;
 import java.util.List;
 
 public interface OrderDAO {
-    public long createOrder(Order orderId);
+    long createOrder(Order orderId);
 
-    public void deleteOrder(long orderId);
+    void deleteOrder(long orderId);
 
-    public Order updateOrder(Order orderId);
+    Order updateOrder(Order orderId);
 
-    public List<Order> listAllOrder();
+    List<Order> listAllOrder();
 
-    void getOrder(Order order);
+    long getOrder(Order order);
 
-    public void updateOrderAfter(long userId, long cartId);
+    void updateOrderAfter(long userId, long cartId);
 
-    public void changeOrderAddress(long userId, long cartId, String address);
+    void changeOrderAddress(long userId, long cartId, String address);
 
-    public void cancelledOrder(long userId);
+    void cancelledOrder(long userId);
 
     String orderTracking(long userId);
+
+    List<Object[]> getProductsInOrder(long userId, long cartId);
 }

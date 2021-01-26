@@ -1,38 +1,32 @@
 package com.deneme.service.impl;
 
-import com.deneme.dao.ShoppingDAO;
-import com.deneme.dao.UserDAO;
-import com.deneme.model.Product;
 import com.deneme.model.ShoppingCart;
-import com.deneme.model.User;
+import com.deneme.repository.ShoppingRepo;
 import com.deneme.service.ShoppingService;
-import com.deneme.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional
 public class ShoppingServiceImpl implements ShoppingService {
 
     @Autowired
-    private ShoppingDAO shoppingDAO;
-
+    private ShoppingRepo shoppingRepo;
 
     @Override
     public long newChart(ShoppingCart cart) {
-        return shoppingDAO.newChart(cart);
+        shoppingRepo.save(cart);
+        return cart.getCartId();
     }
 
     @Override
-    public void addShoppingChart(long cartId,long productId) {
-        shoppingDAO.addShoppingChart(cartId,productId);
+    public ShoppingCart getCartByUserId(long userId) {
+        return shoppingRepo.findById(userId).orElse(null);
     }
 
     @Override
-    public long getCartByUserId(long userId) {
-        return shoppingDAO.getCartByUserId(userId);
+    public long getCartIdByUserId(long userId) {
+        return shoppingRepo.getCartIdByUserId(userId);
     }
 }

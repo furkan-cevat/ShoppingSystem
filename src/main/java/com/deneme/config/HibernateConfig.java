@@ -1,36 +1,35 @@
 package com.deneme.config;
 
 import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Value;;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
 import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
+@EnableConfigurationProperties
 public class HibernateConfig {
-
-    @Value("${spring.datasource.driverClassName}")
-    private String DB_DRIVER;
-
-    @Value("${spring.datasource.password}")
-    private String DB_PASSWORD;
 
     @Value("${spring.datasource.url}")
     private String DB_URL;
 
+    @Value("${spring.datasource.driverClassName}")
+    private String DB_DRIVER;
+
     @Value("${spring.datasource.username}")
     private String DB_USERNAME;
 
+    @Value("${spring.datasource.password}")
+    private String DB_PASSWORD;
+
     @Value("${spring.jpa.database-platform}")
     private String HIBERNATE_DIALECT;
-
 
     @Value("${spring.jpa.hibernate.ddl-auto}")
     private String HIBERNATE_HBM2DDL_AUTO;
@@ -38,10 +37,7 @@ public class HibernateConfig {
     @Value("com")
     private String ENTITYMANAGER_PACKAGES_TO_SCAN;
 
-
-
-
-    @Bean
+    @Bean(name="entityManagerFactory")
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());

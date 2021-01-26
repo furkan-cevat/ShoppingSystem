@@ -7,10 +7,15 @@ import com.deneme.model.User;
 import java.util.List;
 
 public interface ShoppingDAO {
-    public long newChart(ShoppingCart cart);
+    long newChart(ShoppingCart cart);
 
-    public void addShoppingChart(long cartId,long productId);
+    String addShoppingChart(ShoppingCart shoppingCart,long productId,long orderAmount);
 
-    public long getCartByUserId(long userId);
+    long getCartIdByUserId(long userId);
+
+
+
+    ShoppingCart getCartByUserId(long userId);
+
 
 }
