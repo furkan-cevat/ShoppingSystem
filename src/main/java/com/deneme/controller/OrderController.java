@@ -87,8 +87,8 @@ public class OrderController {
 
     @RequestMapping(value = "/allCustomersOrderedSpecificProduct/{productId}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody
-    List<User> customQuery1(@PathVariable("productId") long productId) {
+    List<User> allCustomersOrderedSpecificProduct(@PathVariable("productId") long productId) {
         logger.info("productId : " + productId);
-        return orderService.customQuery1(productId);
+        return orderService.allCustomersOrderedSpecificProduct(productId);
     }
 }

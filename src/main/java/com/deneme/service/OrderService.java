@@ -13,6 +13,6 @@ public interface OrderService {
     String orderTracking(long userId);
     List<Product> getProductsInOrder(long userId, long cartId);
     List<Order> getLoginOrders(long userId);
-    List<User> customQuery1(long productId);
+    List<User> allCustomersOrderedSpecificProduct(long productId);
 
 }

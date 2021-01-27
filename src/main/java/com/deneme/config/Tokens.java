@@ -12,7 +12,7 @@ public class Tokens {
     public void init() {
         System.out.println("Init Metot PostConstruct");
     }
-    private Map<Object,Object> tokensMap= new HashMap<>(); //Key token - value userId
+    private final Map<Object,Object> tokensMap= new HashMap<>(); //Key token - value userId
 
     public Map<Object, Object> getTokensMap() {
         return tokensMap;

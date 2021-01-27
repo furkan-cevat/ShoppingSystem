@@ -33,6 +33,6 @@ public interface OrderRepo extends JpaRepository<Order,Long> {
             + "INNER JOIN orders o ON o.user_userId = u.userId "
             + "INNER JOIN ProductsInCart pc ON o.shoppingCart_cartId = pc.shoppingCart_cartId "
             + "WHERE pc.productId = :pId",nativeQuery = true)
-    List<Object[]> customQuery1(@Param("pId") long productId);
+    List<Object[]> allCustomersOrderedSpecificProduct(@Param("pId") long productId);
 
 }

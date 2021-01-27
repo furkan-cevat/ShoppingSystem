@@ -52,22 +52,11 @@ public class OrderServiceImpl implements OrderService {
         List<Object[]> list = orderRepo.getProductsInOrder(userId,cartId);
         for (Object[] product : list) {
             Product product2 = new Product();
-
-            String stringId = String.valueOf(product[0]);
-            long longId = Long.parseLong(stringId);
-
-            String stringStock = String.valueOf(product[2]);
-            int longStock = Integer.parseInt(stringStock);
-
-            String name = (String) product[1];
-
-            product2.setProductId(longId);
-            product2.setName(name);
-            product2.setStock(longStock);
-
+            product2.setProductId(Long.parseLong(String.valueOf(product[0])));
+            product2.setName((String) product[1]);
+            product2.setStock(Integer.parseInt(String.valueOf(product[2])));
             products.add(product2);
         }
-
         return products;
     }
 
@@ -77,28 +66,18 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<User> customQuery1(long productId) {
+    public List<User> allCustomersOrderedSpecificProduct(long productId) {
         List<User> users = new ArrayList<>();
-        List<Object[]> list = orderRepo.customQuery1(productId);
+        List<Object[]> list = orderRepo.allCustomersOrderedSpecificProduct(productId);
         for (Object[] user : list) {
             User user1 = new User();
-
-            String stringId = String.valueOf(user[0]);
-
-
-            long uId = Long.parseLong(stringId);
-            String name = (String) user[2];
-
-            user1.setUserId(uId);
-            user1.setUsername(name);
-
+            user1.setUserId(Long.parseLong(String.valueOf(user[0])));
+            user1.setUsername((String) user[2]);
             users.add(user1);
-
             if(users.isEmpty()) {
                 return null;
             }
         }
-
         return users;
     }
 
