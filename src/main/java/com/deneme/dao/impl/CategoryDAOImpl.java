@@ -1,5 +1,5 @@
 package com.deneme.dao.impl;
-
+/*
 import com.deneme.dao.CategoryDAO;
 import com.deneme.model.Category;
 import com.deneme.model.User;
@@ -69,12 +69,8 @@ public class CategoryDAOImpl implements CategoryDAO {
         session.getTransaction().commit();
         return c;
 
-
-
     }
 
-
-
-
-
 }
+
+ */

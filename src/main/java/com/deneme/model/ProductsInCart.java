@@ -2,17 +2,11 @@ package com.deneme.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-<<<<<<< HEAD
 import javax.persistence.ManyToOne;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-=======
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
->>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
 
 @Entity
 public class ProductsInCart {
@@ -26,11 +20,6 @@ public class ProductsInCart {
     private ShoppingCart shoppingCart;
 
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
     private long productId;
 
     private long orderAmount;

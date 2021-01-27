@@ -1,5 +1,5 @@
 package com.deneme.dao.impl;
-
+/*
 import com.deneme.dao.ShoppingDAO;
 import com.deneme.dao.UserDAO;
 import com.deneme.model.Product;
@@ -78,7 +78,6 @@ public class ShoppingDAOImpl implements ShoppingDAO {
 
     }
 
-
-
-
 }
+
+ */

@@ -1,5 +1,5 @@
 package com.deneme.dao.impl;
-
+/*
 import com.deneme.dao.OrderDAO;
 import com.deneme.model.Order;
 import org.hibernate.Session;
@@ -202,3 +202,5 @@ public class OrderDAOImpl implements OrderDAO {
 
 
 }
+
+*/

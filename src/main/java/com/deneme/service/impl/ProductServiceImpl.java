@@ -2,10 +2,6 @@ package com.deneme.service.impl;
 
 import com.deneme.model.Category;
 import com.deneme.model.Product;
-<<<<<<< HEAD
-=======
-import com.deneme.model.User;
->>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
 import com.deneme.repository.ProductRepo;
 import com.deneme.service.CategoryService;
 import com.deneme.service.ProductService;
@@ -25,7 +21,6 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private CategoryService categoryService;
 
-
     @Override
     public Long createProduct(Product product, long categoryId) {
         Category category = categoryService.findByIdCategory(categoryId);
@@ -35,16 +30,10 @@ public class ProductServiceImpl implements ProductService {
         product1.setCategory(category);
         productRepo.save(product1);
         return product1.getProductId();
-
     }
 
     @Override
     public void deleteProduct(long productId) {
-<<<<<<< HEAD
-        //Product product1 = getProductById(productId);
-=======
-        Product product1 = getProductById(productId);
->>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
         productRepo.deleteById(productId);
     }
 
@@ -55,13 +44,8 @@ public class ProductServiceImpl implements ProductService {
         product1.setName(product.getName());
         product1.setStock(product.getStock());
         product1.setCategory(category1);
-<<<<<<< HEAD
-=======
-
->>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
         productRepo.save(product1);
         return product1;
-
     }
 
     @Override
@@ -79,26 +63,14 @@ public class ProductServiceImpl implements ProductService {
         productRepo.updateProductCartId(cartId,0);
     }
 
-
     @Override
     public long getProductStock(long productId) {
         return productRepo.findById(productId).orElse(null).getStock();
-<<<<<<< HEAD
     }
 
     @Override
     public void setStockValue(long productId,long cartId) {
         productRepo.setStockValue(productId,cartId);
-=======
-
-    }
-
-
-    @Override
-    public void setStockValue(long productId,long cartId) {
-        productRepo.setStockValue(productId,cartId);
-
->>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
     }
 
     @Override
@@ -107,8 +79,4 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
 }

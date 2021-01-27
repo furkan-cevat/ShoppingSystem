@@ -1,7 +1,6 @@
 package com.deneme.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-<<<<<<< HEAD
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
 import javax.persistence.FetchType;
@@ -9,10 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-=======
-
-import javax.persistence.*;
->>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,11 +24,7 @@ public class Category {
             fetch = FetchType.LAZY,
             mappedBy = "category")
     @JsonIgnore
-<<<<<<< HEAD
     private Set<Product> products = new HashSet<>();
-=======
-    private Set<Product> products = new HashSet<Product>();
->>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
 
     public Set<Product> getProducts() {
         return products;
@@ -61,9 +52,4 @@ public class Category {
     }
 
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
 }

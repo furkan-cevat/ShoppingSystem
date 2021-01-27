@@ -1,5 +1,5 @@
 package com.deneme.dao;
-
+/*
 import com.deneme.model.Category;
 
 public interface CategoryDAO {
@@ -10,3 +10,5 @@ public interface CategoryDAO {
 
 
 }
+
+*/

@@ -1,5 +1,5 @@
 package com.deneme.dao.impl;
-
+/*
 import com.deneme.dao.CustomDAO;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -42,3 +42,5 @@ public class CustomDAOImpl implements CustomDAO {
     }
 
 }
+
+*/

@@ -1,5 +1,5 @@
 package com.deneme.dao.impl;
-
+/*
 import com.deneme.dao.UserDAO;
 import com.deneme.model.Order;
 import com.deneme.model.User;
@@ -183,8 +183,6 @@ public class UserDAOImpl implements UserDAO {
         }
         return orderList;
     }
-
-
-
-
 }
+
+ */

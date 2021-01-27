@@ -1,5 +1,5 @@
 package com.deneme.dao.impl;
-
+/*
 import com.deneme.dao.ProductDAO;
 import com.deneme.model.Category;
 import com.deneme.model.Product;
@@ -192,6 +192,6 @@ public class ProductDAOImpl implements ProductDAO {
             session.close();
         }
     }
-
-
 }
+
+*/

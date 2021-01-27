@@ -12,12 +12,6 @@ import java.util.List;
 @Repository
 public interface OrderRepo extends JpaRepository<Order,Long> {
 
-<<<<<<< HEAD
-=======
-    //@Query(value = "UPDATE orders SET user_userId =:id , shoppingCart_cartId = :id2 WHERE shoppingCart_cartId IS NULL AND user_userId IS NULL",nativeQuery = true)
-    //void updateOrderAfter(@Param("id") long userId , @Param("id2") long cartId);
-
->>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
     @Modifying
     @Query(value = "UPDATE orders SET address =:adr WHERE shoppingCart_cartId = :cId AND user_userId = :uId",nativeQuery = true)
     void changeOrderAddress(@Param("adr") String address , @Param("uId") long userId , @Param("cId") long cartId);
@@ -34,7 +28,6 @@ public interface OrderRepo extends JpaRepository<Order,Long> {
 
     @Query(value = "SELECT o.* FROM User u inner join orders o ON u.userId = o.user_userId where o.user_userId = :uId",nativeQuery = true)
     List<Order> getLoginOrders(@Param("uId") long userId);
-<<<<<<< HEAD
 
     @Query(value = "SELECT u.* FROM User u "
             + "INNER JOIN orders o ON o.user_userId = u.userId "
@@ -42,6 +35,4 @@ public interface OrderRepo extends JpaRepository<Order,Long> {
             + "WHERE pc.productId = :pId",nativeQuery = true)
     List<Object[]> customQuery1(@Param("pId") long productId);
 
-=======
->>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
 }

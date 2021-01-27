@@ -21,33 +21,16 @@ public class ProductController {
 
     @RequestMapping(value = "/createProduct/{categoryId}", method = RequestMethod.POST, consumes = "application/json")
     public @ResponseBody
-<<<<<<< HEAD
     Long newProduct(@RequestBody Product product, @PathVariable(value = "categoryId") long categoryId) {
         logger.info("Product adding. id : "+ product.getProductId());
         return productService.createProduct(product, categoryId);
-=======
-    Long newProduct(@RequestBody Product product , @PathVariable(value = "categoryId") long categoryId) {
-
-
-        Long p = productService.createProduct(product,categoryId);
-        logger.info("Product adding. id : " + p);
-        return p;
->>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
     }
 
     @RequestMapping(value = "/editProduct/{productId}", method = RequestMethod.PUT, consumes = "application/json")
     public @ResponseBody
-<<<<<<< HEAD
     Product updateProduct(@RequestBody Product product) {
         logger.info("Product updating. : " + product.getProductId());
         return productService.updateProduct(product);
-=======
-    Product updateProduct(@PathVariable(value = "productId") long id, @RequestBody Product product) {
-
-        logger.info("Product updating. : " + product.getProductId());
-        return productService.updateProduct(product);
-
->>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
     }
 
     @RequestMapping(value = "/removeProduct/{productId}", method = RequestMethod.DELETE)
@@ -70,11 +53,4 @@ public class ProductController {
         logger.info("products " + productId);
         return productService.getProductById(productId);
     }
-<<<<<<< HEAD
-=======
-
-
-
-
->>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
 }

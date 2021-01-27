@@ -10,11 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
 @ComponentScan(basePackages = "com.deneme")
 @EntityScan(basePackages = "com.deneme.model")
-<<<<<<< HEAD
 @EnableJpaRepositories(basePackages = "com.deneme.repository")
-=======
-@EnableJpaRepositories(basePackages = "com.deneme")
->>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
 public class DemoApplication {
 
     public static void main(String[] args) {

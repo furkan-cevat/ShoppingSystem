@@ -1,5 +1,5 @@
 package com.deneme.dao.impl;
-
+/*
 import com.deneme.dao.ProductInCartDAO;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -36,3 +36,6 @@ public class ProductInCartDAOImpl implements ProductInCartDAO {
 
     }
 }
+
+
+ */

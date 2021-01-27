@@ -1,11 +1,5 @@
 package com.deneme.service.impl;
 
-<<<<<<< HEAD
-=======
-import com.deneme.dao.UserDAO;
-import com.deneme.model.Category;
-import com.deneme.model.Order;
->>>>>>> 50df5cca0f15ebaaf642d658819d99b87fd7485f
 import com.deneme.model.User;
 import com.deneme.repository.UserRepo;
 import com.deneme.service.UserService;
@@ -34,7 +28,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteByIdUser(long userId) {
-        User user1 = getUserById(userId);
         userRepo.deleteById(userId);
 
     }
